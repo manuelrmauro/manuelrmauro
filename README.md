@@ -4,5 +4,7 @@ I'm a Full-Stack developer with the ability to work in a grupo, using the SCRUM 
 Lover of creativity and logic, in search of new projects that enhance my skills and knowledge, willing to share my experiences, and learn from others.
 
 WP: https://walink.co/5f35c0 
-LinkedIn: https://www.linkedin.com/in/manuelmaurodev 
+
+LinkedIn: https://www.linkedin.com/in/manuelmaurodev
+
 Email: manuelrmauro@gmail.com
