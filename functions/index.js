@@ -2,7 +2,7 @@
 // import logger from "firebase-functions/logger";
 
 import { onRequest } from "firebase-functions/https";
-import coreDistributor from "./core/coreDistributor.js";
+import coreDistributor from "./src/core/coreDistributor.js";
 
 const coreInput = coreDistributor.coreInput;
 const coreErrorHandler = coreDistributor.coreErrorHandler;
@@ -12,7 +12,7 @@ const coreErrorHandler = coreDistributor.coreErrorHandler;
 //   response.send("Hello from Firebase!");
 // });
 
-export const CoreApp = onRequest(async (req, res) => {
+export const coreapp = onRequest(async (req, res) => {
   try {
     await coreInput.process(req, res);
   } catch (error) {

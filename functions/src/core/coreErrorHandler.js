@@ -1,31 +1,46 @@
 // coreErrorHandler.js
 class CoreErrorHandler {
-  async process(errorCode, res, technicalDetail = "") {
-    const errors = {
+  constructor() {
+    this.distributor = null;
+
+    // Diccionario centralizado de errores
+    this.errorCatalog = {
       "METHOD_NOT_ALLOWED": [405, "Este método no está habilitado."],
       "ROUTE_NOT_FOUND": [404, "La ruta no existe en el Core."],
-      "INTERNAL_ERROR": [500, "Ocurrió un error inesperado en el servidor."]
+      "INTERNAL_ERROR": [500, "Ocurrió un error inesperado en el servidor."],
+      "FATAL": [500, "Error fatal no categorizado."]
     };
+  }
 
-    const [status, message] = errors[errorCode] || [500, "Error fatal."];
+  init(distributorInstance) {
+    this.distributor = distributorInstance;
+  }
 
-    // Si es un error 500 o tiene detalles técnicos, lo logueamos
+  async process(errorCode, res, technicalDetail = "") {
+    // Buscamos el error en el catálogo o usamos el fatal por defecto
+    const [status, message] =
+      this.errorCatalog[errorCode] || this.errorCatalog["FATAL"];
+
     if (status === 500 || technicalDetail) {
       console.error(
         `[ERROR HANDLER] Code: ${errorCode} | Detail: ${technicalDetail}`
       );
     }
 
-    // Enviamos la respuesta y cerramos el ciclo de Firebase
     if (res?.status) {
       return res.status(status).json({
         success: false,
+        status: status,
         error: {
           code: errorCode,
-          message: message
+          message: message,
+          detail: technicalDetail
         }
       });
     }
+
+    return { status, errorCode, message };
   }
 }
+
 export default new CoreErrorHandler();
