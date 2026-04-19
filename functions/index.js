@@ -1,7 +1,13 @@
 // import { setGlobalOptions } from "firebase-functions";
 // import logger from "firebase-functions/logger";
 
+import { initializeApp } from "firebase-admin/app"; // 1. Importar primero
 import { onRequest } from "firebase-functions/https";
+
+// 2. INICIALIZAR LA APP ANTES QUE TODO LO DEMÁS
+// Esto prepara el terreno para que Firestore funcione en tus otros archivos
+initializeApp();
+
 import coreDistributor from "./src/core/coreDistributor.js";
 
 const coreInput = coreDistributor.coreInput;
