@@ -19,7 +19,12 @@ module.exports = {
     "eol-last": "off",
     "indent": "off",
     "max-len": "off",
-    "comma-dangle": "off"
+    "comma-dangle": "off",
+    "operator-linebreak": [
+      "error",
+      "after",
+      { "overrides": { "?": "before", ":": "before" } }
+    ]
   },
   overrides: [
     {
